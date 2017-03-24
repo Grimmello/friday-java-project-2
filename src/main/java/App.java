@@ -17,6 +17,8 @@ public class App {
 
     get("/members", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      Team team = Team.find(Integer.parseInt(request.queryParams("teamID")));
+      model.put("team",team);
       model.put("members", Member.all());
       model.put("template", "templates/members.vtl");
       return new ModelAndView(model, layout);

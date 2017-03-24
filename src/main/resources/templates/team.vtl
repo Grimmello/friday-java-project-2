@@ -1,15 +1,15 @@
 <!--category.vtl-->
 #if ($team)
-  <h1>$team.getName() members:</h1>
+  <h1>$team.getTeamName() members:</h1>
   <ul>
     #foreach($member in $team.getTeamMembers())
-    <li>$member.getMemberName()</li>
+    <li><a href="/members/$member.getMemberID()">$member.getMemberName()</a></li>
    #end
   </ul>
 #else
   <em><p>Oops! We can't seem to find that team.</p></em>
 #end
 
-<a href="/categories/$team.getID()/members/new">Add a new member</a>
+<a href="/teams/$team.getID()/members/new">Add a new member</a>
 <a href="/teams">All teams</a>
 <!--team.vtl-->
