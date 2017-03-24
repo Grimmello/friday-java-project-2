@@ -23,4 +23,17 @@ public class Team {
   public String getProgramLanguage() {
     return mProgramLanguage;
   }
+  public static Team find(int id) {
+   try {
+     return allTeams.get(id - 1);
+    } catch (IndexOutOfBoundsException exception) {
+     return null;
+    }
+  }
+  public List<String> getTeamMembers () {
+    return mTeamMembers;
+  }
+  public void addTeamMember(Member member) {
+    mTeamMembers.add(member);
+  }
 }
