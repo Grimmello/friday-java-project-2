@@ -16,15 +16,19 @@ public class Team {
     mTeamMembers = new ArrayList<Member>();
     allTeams.add(this);
   }
+
   public String getTeamName() {
     return mTeamName;
   }
+
   public String getProjectName() {
     return mProjectName;
   }
+
   public String getProgramLanguage() {
     return mProgramLanguage;
   }
+
   public static Team find(int id) {
    try {
      return allTeams.get(id - 1);
@@ -32,15 +36,19 @@ public class Team {
      return null;
     }
   }
-  public List<Team> all() {
+
+  public static List<Team> getAll() {
     return allTeams;
   }
+
   public List<Member> getTeamMembers () {
     return mTeamMembers;
   }
+
   public void addTeamMember(Member member) {
     mTeamMembers.add(member);
   }
+
   public static void clearList() {
     allTeams.clear();
   }

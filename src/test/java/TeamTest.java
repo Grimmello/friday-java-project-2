@@ -17,4 +17,11 @@ public class TeamTest {
     Team testTeam = new Team("Test","Test", "Test");
     assertEquals("Test", testTeam.getTeamName());
   }
+  @Test
+  public void all_returnsAllInstancesOfTeam_true() {
+    Team firstTest = new Team("Test1","Test1","Test1");
+    Team secondTest = new Team("Test2","Test2","Test2");
+    assertEquals(true, Team.getAll().contains(firstTest));
+    assertEquals(true, Team.getAll().contains(secondTest));
+  }
 }
