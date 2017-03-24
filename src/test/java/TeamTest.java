@@ -12,4 +12,9 @@ public class TeamTest {
     Team testTeam = new Team("Test", "Test", "Test");
     assertEquals(true, testTeam instanceof Team);
   }
+  @Test
+  public void getName_teamInstantiatesWithName_Test() {
+    Team testTeam = new Team("Test","Test", "Test");
+    assertEquals("Test", testTeam.getTeamName());
+  }
 }
