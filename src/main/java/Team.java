@@ -12,9 +12,9 @@ public class Team {
     mTeamName = teamName;
     mProjectName = projectName;
     mProgramLanguage = programLanguage;
-    mID = allTeams.size();
     mTeamMembers = new ArrayList<Member>();
     allTeams.add(this);
+    mID = allTeams.size();
   }
 
   public String getTeamName() {
@@ -27,6 +27,10 @@ public class Team {
 
   public String getProgramLanguage() {
     return mProgramLanguage;
+  }
+
+  public int getID() {
+    return mID;
   }
 
   public static Team find(int id) {

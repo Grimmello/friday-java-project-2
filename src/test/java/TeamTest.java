@@ -30,4 +30,17 @@ public class TeamTest {
     Team.clearList();
     assertEquals(Team.getAll().size(), 0);
   }
+
+  @Test
+  public void getId_categoriesInstantiateWithAnId_1() {
+    Team testTeam = new Team("Test", "Test", "Test");
+    assertEquals(1, testTeam.getID());
+  }
+
+  @Test
+  public void find_returnsTeamWithSameId_secondTeam() {
+    Team firstTeam = new Team("Test","Test","Test");
+    Team secondTeam = new Team("Test2","Test2","Test2");
+    assertEquals(Team.find(secondTeam.getID()), secondTeam);
+  }
 }
