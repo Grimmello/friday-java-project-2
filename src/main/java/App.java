@@ -1,4 +1,4 @@
-Teamimport java.util.HashMap;
+import java.util.HashMap;
 import java.util.Map;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -17,7 +17,7 @@ public class App {
 
     get("/members", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("members", Members.all());
+      model.put("members", Member.all());
       model.put("template", "templates/members.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -26,43 +26,45 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Team team = Team.find(Integer.parseInt(request.queryParams("teamID")));
       String memberName = request.queryParams("memberName");
-      Member newMemeber = new Member(memberName);
-      team.addTask(newTask);
+      Member newMember = new Member(memberName);
+      team.addTeamMember(newMember);
       model.put("team", team);
-      model.put("template", "templates/team-tasks-success.vtl");
+      model.put("template", "templates/team-members-success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
     get("/members/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      Member task = Member.find(Integer.parseInt(request.params(":id")));
-      model.put("task", task);
-      model.put("template", "templates/task.vtl");
+      Member member = Member.find(Integer.parseInt(request.params(":id")));
+      model.put("member", member);
+      model.put("template", "templates/member.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/categories/new", (request, response) -> {
+    get("/teams/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       model.put("template", "templates/team-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/categories", (request, response) -> {
+    post("/teams", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      String name = request.queryParams("name");
-      Team newTeam = new Team(name);
+      String teamName = request.queryParams("teamName");
+      String teamProject = request.queryParams("teamProject");
+      String teamLanguage = request.queryParams("teamLanguage");
+      Team newTeam = new Team(teamName,teamProject,teamLanguage);
       model.put("template", "templates/team-success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/categories", (request, response) -> {
+    get("/teams", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("categories", Team.all());
-      model.put("template", "templates/categories.vtl");
+      model.put("teams", Team.getAll());
+      model.put("template", "templates/teams.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/categories/:id", (request, response) -> {
+    get("/teams/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Team team = Team.find(Integer.parseInt(request.params(":id")));
       model.put("team", team);
@@ -70,11 +72,11 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("categories/:id/tasks/new", (request, response) -> {
+    get("teams/:id/members/new", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Team team = Team.find(Integer.parseInt(request.params(":id")));
       model.put("team", team);
-      model.put("template", "templates/team-tasks-form.vtl");
+      model.put("template", "templates/team-members-form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
   }
