@@ -4,14 +4,16 @@ public class Team {
   private String mTeamName;
   private String mProjectName;
   private String mProgramLanguage;
-  private List<String> mTeamMembers;
-  public List<Team> allTeams = new ArrayList<Team>();
+  private int mID;
+  private List<Member> mTeamMembers;
+  public static List<Team> allTeams = new ArrayList<Team>();
 
   public Team(String teamName, String projectName, String programLanguage) {
     mTeamName = teamName;
     mProjectName = projectName;
     mProgramLanguage = programLanguage;
-    mTeamMembers = new ArrayList<String>();
+    mID = allTeams.size();
+    mTeamMembers = new ArrayList<Member>();
     allTeams.add(this);
   }
   public String getTeamName() {
@@ -30,10 +32,16 @@ public class Team {
      return null;
     }
   }
-  public List<String> getTeamMembers () {
+  public List<Team> all() {
+    return allTeams;
+  }
+  public List<Member> getTeamMembers () {
     return mTeamMembers;
   }
   public void addTeamMember(Member member) {
     mTeamMembers.add(member);
+  }
+  public static void clearList() {
+    allTeams.clear();
   }
 }
