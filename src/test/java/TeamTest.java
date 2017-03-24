@@ -24,4 +24,10 @@ public class TeamTest {
     assertEquals(true, Team.getAll().contains(firstTest));
     assertEquals(true, Team.getAll().contains(secondTest));
   }
+  @Test
+  public void clear_emptiesAllTeamsFromList_0() {
+    Team testTeam = new Team("Test","Test","Test");
+    Team.clearList();
+    assertEquals(Team.getAll().size(), 0);
+  }
 }
